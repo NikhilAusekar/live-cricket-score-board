@@ -4,7 +4,7 @@ import type { Batsman } from '../../../types/palyer';
 interface CurrentBatsmenUpdaterProps {
   batmans?: Batsman[];
   onUpdateBatsman: (batsman:Batsman[]) => void;
-  onReplaceBatsman: (outBatsmanId: string, newBatsmanName: string) => void;
+  onReplaceBatsman: (batsman:Batsman[]) => void;
 }
 
 export const CurrentBatsmenUpdater: React.FC<CurrentBatsmenUpdaterProps> = ({
@@ -46,13 +46,33 @@ export const CurrentBatsmenUpdater: React.FC<CurrentBatsmenUpdaterProps> = ({
     onUpdateBatsman(updated);
   };
 
-  const handleReplaceBatsman = () => {
-    if (outBatsmanId && newBatsmanName.trim()) {
-      onReplaceBatsman(outBatsmanId, newBatsmanName.trim());
-      setNewBatsmanName('');
-      setOutBatsmanId(null);
-    }
-  };
+  function generate8DigitId() {
+  return Math.floor(10000000 + Math.random() * 90000000).toString();
+}
+
+const handleReplaceBatsman = () => {
+  if (outBatsmanId && newBatsmanName.trim()) {
+    const newBatMens = editableBatsmen.map((batman) => {
+      if (batman.id === outBatsmanId) {
+        return {
+          ...batman,
+          id: generate8DigitId(),
+          name: newBatsmanName.trim(),
+          runs:0,
+          balls: 0,
+          fours: 0,
+          sixes: 0,
+        };
+      }
+      return batman;
+    });
+
+    onReplaceBatsman(newBatMens);
+    setNewBatsmanName('');
+    setOutBatsmanId(null);
+  }
+};
+
 
   if (!batmans || batmans.length === 0) {
     return <p className="text-gray-600">No batsmen currently at the crease.</p>;

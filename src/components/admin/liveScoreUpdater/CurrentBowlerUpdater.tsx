@@ -41,6 +41,7 @@ export const CurrentBowlerUpdater: React.FC<BowlerInfoProps> = ({
         />
         <div className="text-right space-y-1">
           <div className="text-xl font-bold flex items-center gap-2">
+            <label>R</label>
             <input
               type="number"
               name="runs"
@@ -49,6 +50,7 @@ export const CurrentBowlerUpdater: React.FC<BowlerInfoProps> = ({
               className="w-16 bg-white border px-1 py-0.5 rounded text-right"
             />
             /
+            <label>W</label>
             <input
               type="number"
               name="wickets"

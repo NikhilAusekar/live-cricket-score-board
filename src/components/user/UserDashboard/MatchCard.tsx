@@ -9,7 +9,8 @@ interface MatchCardProps {
 
 export const MatchCard: React.FC<MatchCardProps> = ({ match, isLive, isUpcoming }) => {
 
-  const batsMan = match.matchScore?.currentBatsmen.filter((batsman)=> batsman.isStriker === true)[0]
+  const batsManOnStrike = match.matchScore?.currentBatsmen.filter((batsman)=> batsman.isStriker === true)[0]
+  const batsManNonStrike = match.matchScore?.currentBatsmen.filter((batsman)=> batsman.isStriker === false)[0]
 
   return (
     <div className={`bg-white rounded-xl shadow-md p-6 border-l-8 
@@ -51,12 +52,12 @@ export const MatchCard: React.FC<MatchCardProps> = ({ match, isLive, isUpcoming 
           <div className="mt-4">
             <h4 className="text-md font-semibold text-gray-700 mb-1">Batting</h4>
             <div className="text-sm text-gray-800">
-              <span className="font-semibold">{batsMan && batsMan.name}</span>*
-              &nbsp;({batsMan && batsMan.runs} runs, {batsMan && batsMan.balls} balls)
+              <span className="font-semibold">{batsManOnStrike && batsManOnStrike.name}</span>*
+              &nbsp;({batsManOnStrike && batsManOnStrike.runs} runs, {batsManOnStrike && batsManOnStrike.balls} balls)
             </div>
             <div className="text-sm text-gray-800">
-              <span>{batsMan && batsMan.name}</span>
-              &nbsp;({batsMan && batsMan.runs} runs, {batsMan && batsMan.balls} balls)
+              <span>{batsManNonStrike && batsManNonStrike.name}</span>
+              &nbsp;({batsManNonStrike && batsManNonStrike.runs} runs, {batsManNonStrike && batsManNonStrike.balls} balls)
             </div>
           </div>
 
