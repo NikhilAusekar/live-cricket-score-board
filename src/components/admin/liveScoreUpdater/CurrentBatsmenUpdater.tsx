@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import type { Batsman } from '../../../types/palyer';
 
 interface CurrentBatsmenUpdaterProps {
-  matchScore?: Batsman[];
-  onUpdateBatsman: (batsmanId: string, updates: Partial<Batsman>) => void;
+  batmans?: Batsman[];
+  onUpdateBatsman: (batsman:Batsman[]) => void;
   onReplaceBatsman: (outBatsmanId: string, newBatsmanName: string) => void;
 }
 
 export const CurrentBatsmenUpdater: React.FC<CurrentBatsmenUpdaterProps> = ({
-  matchScore = [],
+  batmans = [],
   onUpdateBatsman,
   onReplaceBatsman,
 }) => {
@@ -17,8 +17,8 @@ export const CurrentBatsmenUpdater: React.FC<CurrentBatsmenUpdaterProps> = ({
   const [newBatsmanName, setNewBatsmanName] = useState('');
 
   useEffect(() => {
-    setEditableBatsmen([...matchScore]);
-  }, [matchScore]);
+    setEditableBatsmen([...batmans]);
+  }, [batmans]);
 
   const handleChange = (id: string, field: keyof Batsman, value: string) => {
     const updated = editableBatsmen.map((batsman) =>
@@ -30,18 +30,10 @@ export const CurrentBatsmenUpdater: React.FC<CurrentBatsmenUpdaterProps> = ({
   };
 
   const applyEdits = () => {
-    editableBatsmen.forEach((batsman) => {
-      const original = matchScore.find((b) => b.id === batsman.id);
-      if (
-        original &&
-        (original.runs !== batsman.runs || original.balls !== batsman.balls)
-      ) {
-        onUpdateBatsman(batsman.id, {
-          runs: batsman.runs,
-          balls: batsman.balls,
-        });
-      }
-    });
+
+      onUpdateBatsman(editableBatsmen);
+      console.log(editableBatsmen);
+
   };
 
   const toggleStrike = () => {
@@ -51,9 +43,7 @@ export const CurrentBatsmenUpdater: React.FC<CurrentBatsmenUpdaterProps> = ({
     }));
     setEditableBatsmen(updated);
 
-    updated.forEach((batsman) => {
-      onUpdateBatsman(batsman.id, { isStriker: batsman.isStriker });
-    });
+    onUpdateBatsman(updated);
   };
 
   const handleReplaceBatsman = () => {
@@ -64,7 +54,7 @@ export const CurrentBatsmenUpdater: React.FC<CurrentBatsmenUpdaterProps> = ({
     }
   };
 
-  if (!matchScore || matchScore.length === 0) {
+  if (!batmans || batmans.length === 0) {
     return <p className="text-gray-600">No batsmen currently at the crease.</p>;
   }
 

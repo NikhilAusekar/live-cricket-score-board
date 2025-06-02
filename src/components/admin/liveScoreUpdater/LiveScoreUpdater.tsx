@@ -91,6 +91,8 @@ const sendUpdatedMatchToServer = async (updatedMatch: Match) => {
         currentBatsmen: newBatsmen,
       },
     };
+
+    console.log("newScore",updatedMatch)
     updateMatchScore(updatedMatch as any);
     sendUpdatedMatchToServer(updatedMatch as any);
   };
@@ -162,7 +164,7 @@ const sendUpdatedMatchToServer = async (updatedMatch: Match) => {
         <div className="bg-white p-6 rounded-lg shadow-md md:col-span-2">
           <h2 className="text-2xl font-semibold mb-4">Current Batsmen</h2>
           <CurrentBatsmenUpdater
-            matchScore={currentMatchScore?.matchScore?.currentBatsmen}
+            batmans={currentMatchScore?.matchScore?.currentBatsmen}
             onUpdateBatsman={onUpdateBatsmen}
             onReplaceBatsman={onUpdateBatsmen}
           />

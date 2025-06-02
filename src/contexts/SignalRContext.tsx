@@ -25,7 +25,7 @@ export const SignalRProvider: React.FC<SignalRProviderProps> = ({ children }) =>
   const addCommentary = useMatchStore((state: any) => state.addCommentary);
 
   useEffect(() => {
-    const hubUrl = "https://localhost:5234/scorehub";
+    const hubUrl = "https://smeconnectsignalr-cwb4a8ergjefbjfk.canadacentral-01.azurewebsites.net/scorehub"; //"https://localhost:5234/scorehub";
 
     if (!hubUrl) {
       console.error("SignalR Hub URL is not provided.");

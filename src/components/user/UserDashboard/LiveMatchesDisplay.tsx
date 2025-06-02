@@ -31,16 +31,16 @@ export const LiveMatchesDisplay: React.FC<LiveMatchesDisplayProps> = ({ initialL
         updateLiveMatchScore(updatedScore); // Update the specific match's score in the store
       };
 
-      connection.on("ReceiveScoreUpdate", handleReceiveScoreUpdate);
+      connection.on("ReceiveMessage", handleReceiveScoreUpdate);
 
       // Join a generic group for all public score updates, or iterate through initialLiveMatches
       // to join specific match groups if your SignalR hub is designed that way.
-      // For simplicity, let's assume "ReceiveScoreUpdate" broadcasts to all connected users.
+      // For simplicity, let's assume "ReceiveMessage" broadcasts to all connected users.
       // If you have specific "match groups" (e.g., "MatchUpdateGroup_matchId"), you'd invoke:
       // initialLiveMatches.forEach(match => connection.invoke("JoinMatchUpdateGroup", match.id));
 
       return () => {
-        connection.off("ReceiveScoreUpdate", handleReceiveScoreUpdate);
+        connection.off("ReceiveMessage", handleReceiveScoreUpdate);
         // initialLiveMatches.forEach(match => connection.invoke("LeaveMatchUpdateGroup", match.id));
       };
     }

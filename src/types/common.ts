@@ -109,7 +109,7 @@ export const matches: Match = {
         isStriker: true,
       },
       {
-        id: 'player101',
+        id: 'player102',
         name: 'Uday',
         runs: 65,
         balls: 42,
