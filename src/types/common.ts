@@ -93,7 +93,7 @@ export const matches: Match = {
   matchScore: {
     totalRuns: 150,
     wickets: 4,
-    overs: 18.0,
+    overs: 3.0,
     innings: 1,
     requiredRuns: 10,
     requiredBalls: 12,

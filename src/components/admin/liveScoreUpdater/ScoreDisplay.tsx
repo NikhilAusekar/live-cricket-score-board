@@ -49,13 +49,13 @@ export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, onUpdateScore
 
   return (
     <div className="text-center mb-6 space-y-3">
-      <div className="text-5xl font-extrabold text-gray-800">
+      <div className="text-4xl font-extrabold text-gray-800">
         <input
           type="number"
           name="totalRuns"
           value={matchScore?.totalRuns || 0}
           onChange={handleChange}
-          className="w-40 text-center bg-white border rounded px-2 py-1"
+          className="w-34 text-center bg-white border rounded px-2 py-1"
         />
         <span className='px-2'>/</span>
         <input
@@ -63,7 +63,7 @@ export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, onUpdateScore
           name="wickets"
           value={matchScore?.wickets || 0}
           onChange={handleChange}
-          className="w-40 text-center bg-white border rounded px-2 py-1"
+          className="w-34 text-center bg-white border rounded px-2 py-1"
         />
       </div>
       <div className="text-2xl font-semibold text-gray-600">

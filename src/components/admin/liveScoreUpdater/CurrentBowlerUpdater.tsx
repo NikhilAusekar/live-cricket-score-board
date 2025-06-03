@@ -66,7 +66,7 @@ export const CurrentBowlerUpdater: React.FC<BowlerInfoProps> = ({
               name="overs"
               value={updatedBowler.overs}
               onChange={handleChange}
-              className="w-12 bg-white border px-1 py-0.5 rounded text-right"
+              className="w-16 bg-white border px-1 py-0.5 rounded text-right"
               step="0.1"
             />
             {' '}Overs)

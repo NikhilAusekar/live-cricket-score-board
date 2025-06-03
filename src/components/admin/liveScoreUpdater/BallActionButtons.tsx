@@ -20,8 +20,8 @@ export const BallActionButtons: React.FC<BallActionButtonsProps> = ({ onAction }
       {/* Extras */}
       <button className={`${commonButtonClass} bg-yellow-500 hover:bg-yellow-600 text-black`} onClick={() => onAction('wide')}>Wide</button>
       <button className={`${commonButtonClass} bg-orange-500 hover:bg-orange-600`} onClick={() => onAction('noball')}>No Ball</button>
-      <button className={`${commonButtonClass} bg-teal-500 hover:bg-teal-600`} onClick={() => onAction('bye')}>Bye</button>
-      <button className={`${commonButtonClass} bg-indigo-500 hover:bg-indigo-600`} onClick={() => onAction('legbye')}>Leg Bye</button>
+      {/* <button className={`${commonButtonClass} bg-teal-500 hover:bg-teal-600`} onClick={() => onAction('bye')}>Bye</button>
+      <button className={`${commonButtonClass} bg-indigo-500 hover:bg-indigo-600`} onClick={() => onAction('legbye')}>Leg Bye</button> */}
 
       {/* Wicket & Undo */}
       <button className={`${commonButtonClass} bg-red-600 hover:bg-red-700 col-span-2`} onClick={() => onAction('wicket')}>Wicket</button>
