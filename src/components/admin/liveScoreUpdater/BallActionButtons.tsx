@@ -24,6 +24,7 @@ export const BallActionButtons: React.FC<BallActionButtonsProps> = ({ onAction }
       <button className={`${commonButtonClass} bg-indigo-500 hover:bg-indigo-600`} onClick={() => onAction('legbye')}>Leg Bye</button> */}
 
       {/* Wicket & Undo */}
+      <button className={`${commonButtonClass} bg-red-600 hover:bg-red-700 col-span-2`} onClick={() => onAction('runwicket')}>Run + Wicket</button>
       <button className={`${commonButtonClass} bg-red-600 hover:bg-red-700 col-span-2`} onClick={() => onAction('wicket')}>Wicket</button>
       <button className={`${commonButtonClass} bg-gray-500 hover:bg-gray-600 col-span-1`} onClick={() => onAction('undo')}>Undo</button>
       {/* Add more specific wicket types like bowled, caught, run out, stumped etc. */}

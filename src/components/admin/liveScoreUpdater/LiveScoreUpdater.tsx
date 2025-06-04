@@ -158,7 +158,7 @@ const updateMatchForBallAction = (
   const striker = batsmen?.find(b => b.isStriker);
   const nonStriker = batsmen?.find(b => b.isStriker == false);
 
-  const isExtra = actionType === "wide" || actionType === "noball";
+  const isExtra = actionType === "wide" || actionType === "noball" || actionType === "runwicket";
   const extraRuns =  ballActionRuns[actionType] || 0;
   console.log(extraRuns);
   const legalDelivery = !isExtra;
@@ -208,9 +208,9 @@ const updateMatchForBallAction = (
   matchScore.currentPartnership += (runValue || 0) + extraRuns;
 
   // 6. Update wickets (if any)
-  if (actionType === "wicket") {
+  if (actionType === "wicket" || actionType ==="runwicket") {
     matchScore.wickets != null? matchScore.wickets += 1 : 0;
-    matchScore.currentPartnership = 0;
+   
     // You could also push a new `fallOfWickets` entry here
   }
 
@@ -256,6 +256,8 @@ const onBallAction = (actionType: string, value?: number) => {
     updateMatchForBallAction("noball");
   } else if (actionType === "wicket") {
     updateMatchForBallAction("wicket");
+  }else if (actionType === "runwicket") {
+    updateMatchForBallAction("runwicket");
   } else if (actionType === "undo") {
     // Implement undo logic as needed
   }
