@@ -30,13 +30,16 @@ export const MatchCard: React.FC<MatchCardProps> = ({ match, isLive, isUpcoming 
 
       {isLive && match && (
         <div className="bg-gray-50 p-4 rounded-lg shadow-inner">
+          <p className="text-lg font-semibold text-gray-700 mb-2">
+      🏏      {match.battingTeamName}
+          </p>
           <div className="flex justify-between items-center mb-2">
             <div className="text-3xl font-bold text-gray-800">
               {match.matchScore?.totalRuns}/{match.matchScore?.wickets}
             </div>
-            <div className="text-sm text-gray-500">
+            {/* <div className="text-sm text-gray-500">
               Overs: {match?.matchScore?.overs }
-            </div>
+            </div> */}
           </div>
 
           {match.target && (

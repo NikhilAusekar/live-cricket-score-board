@@ -215,6 +215,7 @@ export interface Match {
   team1Name: string;
   team2Id: string;
   team2Name: string;
+  battingTeamName:string;
   oversPerInnings: number;
   status: MatchStatus;
   tossWinnerId?: string;
@@ -223,7 +224,6 @@ export interface Match {
   manOfTheMatchPlayerId?: string;
   manOfTheMatchName?: string;
   currentInnings?: Innings;
-  inningsHistory: Innings[];
   target?: number;
   winningTeamId?: string;
   winningTeamName?: string;

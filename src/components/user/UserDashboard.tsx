@@ -4,6 +4,8 @@ import type { Match } from '../../types/match';
 import LoadingSpinner from '../core/LoadingSpinner';
 import ErrorDisplay from '../common/ErrorDisplay';
 import { LiveMatchesDisplay } from './UserDashboard/LiveMatchesDisplay';
+import { CompletedMatchesDisplay } from './UserDashboard/CompletedMatchesDisplay';
+import { UpcomingMatchesDisplay } from './UserDashboard/UpcomingMatchesDisplay';
 // import { CompletedMatchesDisplay } from './UserDashboard/CompletedMatchesDisplay';
 // import { UpcomingMatchesDisplay } from './UserDashboard/UpcomingMatchesDisplay';
 
@@ -65,16 +67,15 @@ export const UserDashboard: React.FC<UserDashboardProps> = () => {
         <LiveMatchesDisplay initialLiveMatches={liveMatches as Match} />
       </section>
 
-      {/* Completed Matches Section
-      <section className="mb-10">
+
+      {/* <section className="mb-10">
         <h2 className="text-3xl font-semibold mb-6 text-green-700 border-b-2 pb-2">Completed Matches</h2>
-        <CompletedMatchesDisplay matches={completedMatches} />
+        <CompletedMatchesDisplay matches={null} />
       </section>
 
-      {/* Upcoming Matches Section 
       <section className="mb-10">
         <h2 className="text-3xl font-semibold mb-6 text-purple-700 border-b-2 pb-2">Upcoming Matches</h2>
-        <UpcomingMatchesDisplay matches={upcomingMatches} />
+        <UpcomingMatchesDisplay matches={null} />
       </section> */}
     </div>
   );

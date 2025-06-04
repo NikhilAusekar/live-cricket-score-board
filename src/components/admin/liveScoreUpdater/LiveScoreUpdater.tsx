@@ -95,11 +95,14 @@ const sendUpdatedMatchToServer = async (updatedMatch: Match) => {
       },
     };
 
-    console.log("newScore",updatedMatch)
     updateMatchScore(updatedMatch as any);
     sendUpdatedMatchToServer(updatedMatch as any);
   };
 
+const updateMatchTeam = (newMatch: any) => {
+    updateMatchScore(newMatch as any);
+    sendUpdatedMatchToServer(newMatch as any);
+  };
 
 const getBowlerOver = (overs: string) => {
   const runs = overs?.toString().split(".");
@@ -281,7 +284,7 @@ const onBallAction = (actionType: string, value?: number) => {
         {/* Score Display Section */}
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4">Current Score</h2>
-          <ScoreDisplay score={currentMatchScore as any} onUpdateScore={() => {}} />
+          <ScoreDisplay score={currentMatchScore as any} updateMatchTeam={updateMatchTeam} />
           <CurrentBowlerUpdater
             bowler={currentMatchScore.matchScore?.currentBowler as any}
             updateCurrentBowlwer={onUpdateBowler}

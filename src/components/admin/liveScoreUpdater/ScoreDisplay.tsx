@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import type { Match } from '../../../types/match';
 
+
 interface ScoreDisplayProps {
   score: Match;
-  onUpdateScore: (newScore: Match) => void;
+  updateMatchTeam: (newScore: Match) => void;
 }
 
-export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, onUpdateScore }) => {
+export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, updateMatchTeam }) => {
   const [editableScore, setEditableScore] = useState<Match>({ ...score });
 
   useEffect(() => {
@@ -43,6 +44,24 @@ export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, onUpdateScore
       [key]: Number(value),
     }));
   }
+};
+
+const toggleBattingTeam = () => {
+   const currentBattingTeamName =
+    editableScore.team1Name === editableScore.battingTeamName
+      ? editableScore.team2Name
+      : editableScore.team1Name;
+
+      console.log(currentBattingTeamName);
+
+  const updateScore = {
+    ...editableScore,
+    battingTeamName: currentBattingTeamName,
+  };
+
+  console.log(currentBattingTeamName);
+  updateMatchTeam(updateScore);
+
 };
 
   const { matchScore } = editableScore;
@@ -125,12 +144,20 @@ export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, onUpdateScore
         </div>
       )}
 
-      <button
-        onClick={() => onUpdateScore(editableScore)}
-        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-      >
-        Update Score
-      </button>
+      <div className="flex space-x-4 mt-6">
+        <button
+          onClick={() => updateMatchTeam(editableScore)}
+          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+          Update Score
+        </button>
+        <button
+          onClick={() => toggleBattingTeam()}
+          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+          Change Iinning
+        </button>
+      </div>
     </div>
   );
 };
