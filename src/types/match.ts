@@ -47,7 +47,7 @@ export const demoScore = {
                       sixes: 1,
                       isStriker: true,
                     }],
-      currentPartnership: 1,
+      currentPartnership: 0,
       matchStatus: 'Ongoing',
       commentary: [],
     };

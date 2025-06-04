@@ -64,6 +64,7 @@ const sendUpdatedMatchToServer = async (updatedMatch: Match) => {
   }
   try {
     await connection.invoke('SendMessage', updatedMatch);  // use SendMessage here
+    localStorage.setItem('match-store',JSON.stringify(updatedMatch));
     console.log('Sent updated match to server:', updatedMatch);
   } catch (err) {
     console.error('Failed to send updated match:', err);
@@ -98,6 +99,17 @@ const sendUpdatedMatchToServer = async (updatedMatch: Match) => {
     updateMatchScore(updatedMatch as any);
     sendUpdatedMatchToServer(updatedMatch as any);
   };
+
+const setTeamName =(value:string,team:string)=>{
+
+  const updatedMatch = {
+      ...currentMatchScore,
+        [team]: value,
+      }
+
+    updateMatchScore(updatedMatch as any);
+    sendUpdatedMatchToServer(updatedMatch as any);
+}
 
 const updateMatchTeam = (newMatch: any) => {
     updateMatchScore(newMatch as any);
@@ -160,7 +172,7 @@ const updateMatchForBallAction = (
   }
 
   // 2. Update runs
-  const totalRuns = matchScore.totalRuns ? matchScore.totalRuns + (runValue || 0) + extraRuns : 0;
+  const totalRuns = matchScore.totalRuns != null  ? matchScore.totalRuns + (runValue || 0) + extraRuns : 0;
   matchScore.totalRuns = totalRuns;
   matchScore.requiredRuns = (matchScore.requiredRuns || 0) - (runValue || 0);
 
@@ -197,7 +209,7 @@ const updateMatchForBallAction = (
 
   // 6. Update wickets (if any)
   if (actionType === "wicket") {
-    matchScore.wickets ? matchScore.wickets += 1 : 0;
+    matchScore.wickets != null? matchScore.wickets += 1 : 0;
     matchScore.currentPartnership = 0;
     // You could also push a new `fallOfWickets` entry here
   }
@@ -277,8 +289,19 @@ const onBallAction = (actionType: string, value?: number) => {
   return (
     <div className="container mx-auto p-4">
       <h3 className="text-3xl font-bold mb-4 text-center">
-        Live Score Update: {matchDetails.team1Name} vs {matchDetails.team2Name}
-      </h3>
+      Live Score Update:{" "}
+      <input
+        value={currentMatchScore.team1Name}
+        onChange={(e) => setTeamName(e.target.value,"team1Name")}
+        className="bg-transparent border-b border-gray-300 focus:outline-none text-center w-32"
+      />{" "}
+      vs{" "}
+      <input
+        value={currentMatchScore.team2Name}
+        onChange={(e) => setTeamName(e.target.value,"team2Name")}
+        className="bg-transparent border-b border-gray-300 focus:outline-none text-center w-32"
+      />
+    </h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Score Display Section */}

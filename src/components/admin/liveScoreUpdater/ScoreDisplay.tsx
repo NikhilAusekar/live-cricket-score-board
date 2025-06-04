@@ -41,7 +41,7 @@ export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, updateMatchTe
     const key = name as keyof Match;
     setEditableScore((prev) => ({
       ...prev,
-      [key]: Number(value),
+      [key]: key === "battingTeamName"? value: Number(value),
     }));
   }
 };
@@ -64,10 +64,20 @@ const toggleBattingTeam = () => {
 
 };
 
-  const { matchScore } = editableScore;
+  const { matchScore,battingTeamName } = editableScore;
 
   return (
     <div className="text-center mb-6 space-y-3">
+      <div className='text-4xl font-extrabold text-gray-800'>
+        Batting:
+        <input
+          type="text"
+          name="battingTeamName"
+          value={battingTeamName}
+          onChange={handleChange}
+          className="w-34 text-center bg-white border rounded px-2 py-1"
+        />
+      </div>
       <div className="text-4xl font-extrabold text-gray-800">
         <input
           type="number"

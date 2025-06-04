@@ -17,6 +17,7 @@ interface MatchStoreState {
 
 export const useMatchStore = create<MatchStoreState>((set) => ({
   // Admin
+  
   currentMatchScore : matches as Match,
 
   setMatchScore: (score) => set({ currentMatchScore: score }),

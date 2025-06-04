@@ -1,18 +1,23 @@
 // src/services/matchService.ts
 import axios from 'axios';
-import {type Match, type CreateMatchPayload,type UpdateMatchPayload, demoScore, type LiveMatchScore } from '../types/match';
-import {matches, type ApiResponse } from '../types/common';
+import { type Match, type CreateMatchPayload, type UpdateMatchPayload, demoScore, type LiveMatchScore } from '../types/match';
+import { matches, type ApiResponse } from '../types/common';
 import { type LiveScoreUpdateDto } from '../types/match'; // For SignalR DTOs if sending via REST
 
-const API_BASE_URL =  'http://localhost:5000/api';
+const API_BASE_URL = 'http://localhost:5000/api';
 
 const matchService = {
   getMatches: async (status?: string): Promise<Match> => {
     // const params = status ? { status } : {};
     // const response = await axios.get<ApiResponse<Match[]>>(`${API_BASE_URL}/matches`, { params });
     // return response.data.data;
-    
-    return matches as any;
+    const match = localStorage.getItem('match-store');
+    if (match) {
+      const parsedMatch = JSON.parse(match);
+      return parsedMatch;
+    } else {
+      return matches as any;
+    }
   },
 
   createMatch: async (payload: CreateMatchPayload): Promise<Match> => {

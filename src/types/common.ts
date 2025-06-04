@@ -82,20 +82,20 @@ export const matches: Match = {
   team1Name: 'RCB',
   team2Id: 'team-002',
   team2Name: 'PBKS',
-  oversPerInnings: 20,
+  oversPerInnings: 12,
   status: 'Ongoing',
   tossWinnerId: 'team-001',
   tossWinnerName: 'Team A',
   battingTeamName:'RCB',
   tossDecision: 'Bat',
   currentInnings: inningsExample,
-  target: 165,
+  target: 0,
   matchScore: {
-    totalRuns: 150,
-    wickets: 4,
-    overs: 3.0,
+    totalRuns: 0,
+    wickets: 0,
+    overs: 0.0,
     innings: 1,
-    requiredRuns: 10,
+    requiredRuns: 0,
     requiredBalls: 12,
     currentBatsmen: [
       {
@@ -121,11 +121,11 @@ export const matches: Match = {
     ],
     currentBowler: {
       name: 'Sachin',
-      overs: "3.2",
-      runs: 24,
-      wickets: 1,
+      overs: "0.0",
+      runs: 0,
+      wickets: 0,
     },
-    currentPartnership: 70,
+    currentPartnership: 0,
     lastWicket: {
       wicketNumber: 1,
       score: 42,
@@ -145,7 +145,7 @@ export const matches: Match = {
         type: 'FOUR'
       }
     ],
-    extras: 5,
+    extras: 0,
     fallOfWickets: [
       {
         wicketNumber: 1,
