@@ -132,7 +132,8 @@ const updateMatchForBallAction = (
   const nonStriker = batsmen?.find(b => b.isStriker == false);
 
   const isExtra = actionType === "wide" || actionType === "noball" || actionType === "runwicket";
-  const extraRuns =  ballActionRuns[actionType] || 0;
+  type BallActionType = keyof typeof ballActionRuns;
+  const extraRuns =  ballActionRuns[actionType as BallActionType] || 0;
   console.log(extraRuns);
   const legalDelivery = !isExtra;
 
@@ -178,7 +179,7 @@ const updateMatchForBallAction = (
   }
 
   // 5. Update current partnership
-  matchScore.currentPartnership += (runValue || 0) + extraRuns;
+  if(matchScore.currentPartnership != null)  matchScore.currentPartnership += (runValue || 0) + extraRuns;
 
   // 6. Update wickets (if any)
   if (actionType === "wicket" || actionType ==="runwicket") {
@@ -188,7 +189,7 @@ const updateMatchForBallAction = (
   }
 
   // 7. Update extras
-  if (isExtra) {
+  if (isExtra && matchScore.extras != null) {
     matchScore.extras += extraRuns;
   }
 
