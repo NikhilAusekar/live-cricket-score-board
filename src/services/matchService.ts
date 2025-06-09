@@ -1,6 +1,6 @@
 // src/services/matchService.ts
 import axios from 'axios';
-import { type Match, type CreateMatchPayload, type UpdateMatchPayload, demoScore, type LiveMatchScore } from '../types/match';
+import { type Match, type CreateMatchPayload, type UpdateMatchPayload } from '../types/match';
 import { matches, type ApiResponse } from '../types/common';
 import { type LiveScoreUpdateDto } from '../types/match'; // For SignalR DTOs if sending via REST
 

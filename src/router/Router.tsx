@@ -5,7 +5,6 @@ import Layout from '../components/core/Layout';
 import AdminDashboard from '../components/admin/AdminDashboard'; 
 import ProtectedRoute from '../components/auth/ProtectedRoutes';
 import Login from '../components/auth/Login';
-import { UserDashboard } from '../components/user/UserDashboard';
 import MatchSetupForm from '../components/admin/MatchSetupForm';
 import TeamManagement from '../components/admin/teamManagement/TeamManagement';
 import PlayerManagement from '../components/admin/playerManagement/PlayerManagement';
@@ -17,7 +16,6 @@ function AppRouter() {
     <Routes>
       {/* Public Routes - Accessible to everyone */}
       <Route path="/" element={<Layout showFooter={true} showHeader={true} />}>
-        <Route path="/live" element={<UserDashboard />} />
         {/*<Route path="/match/:matchId" element={<MatchScorecard />} /> 
         <Route path="/standings" element={<TournamentStandings />} />  */}
         <Route path="/login" element={<Login />} />  

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSignalR } from '../../../contexts/SignalRContext';
 import { useMatchStore } from '../../../store/UseMatchStore';
 import type { Match } from '../../../types/match';
 import matchService from '../../../services/matchService';
@@ -14,7 +13,7 @@ import { ballActionRuns } from '../../common/Constatns';
 interface LiveScoreUpdaterProps {}
 
 export const LiveScoreUpdater: React.FC<LiveScoreUpdaterProps> = () => {
-  const { connection } = useSignalR();
+
   const { currentMatchScore, updateMatchScore } = useMatchStore();
 
   const [loading, setLoading] = useState<boolean>(true);
@@ -42,35 +41,9 @@ export const LiveScoreUpdater: React.FC<LiveScoreUpdaterProps> = () => {
     fetchInitialMatchData();
   }, [updateMatchScore]);
 
-useEffect(() => {
-  if (!connection) return;
-
-  const messageHandler = (updatedMatch: Match) => {
-    console.log('Received message:', updatedMatch);
-    updateMatchScore(updatedMatch);
-  };
-
-  connection.on('ReceiveMessage', messageHandler);
-
-  return () => {
-    connection.off('ReceiveMessage', messageHandler);
-  };
-}, [connection, updateMatchScore]);
-
-const sendUpdatedMatchToServer = async (updatedMatch: Match) => {
-  if (!connection || connection.state !== 'Connected') {
-    setError('SignalR connection is not established.');
-    return;
+  const sendUpdatedMatchToServer=(matchData:any)=>{
+    // write here logic to call the api
   }
-  try {
-    await connection.invoke('SendMessage', updatedMatch);  // use SendMessage here
-    localStorage.setItem('match-store',JSON.stringify(updatedMatch));
-    console.log('Sent updated match to server:', updatedMatch);
-  } catch (err) {
-    console.error('Failed to send updated match:', err);
-    setError('Failed to send updates to server.');
-  }
-};
 
   // Callbacks passed down to children to update partial data
   const onUpdateBowler = (newBowler: any) => {
