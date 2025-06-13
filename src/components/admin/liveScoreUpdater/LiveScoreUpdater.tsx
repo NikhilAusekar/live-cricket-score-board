@@ -266,17 +266,39 @@ const onBallAction = (actionType: string, value?: number) => {
     <div className="container mx-auto p-4">
       <h3 className="text-3xl font-bold mb-4 text-center">
       Live Score Update:{" "}
-      <input
-        value={currentMatchScore.team1Name}
-        onChange={(e) => setTeamName(e.target.value,"team1Name")}
-        className="bg-transparent border-b border-gray-300 focus:outline-none text-center w-32"
-      />{" "}
-      vs{" "}
-      <input
-        value={currentMatchScore.team2Name}
-        onChange={(e) => setTeamName(e.target.value,"team2Name")}
-        className="bg-transparent border-b border-gray-300 focus:outline-none text-center w-32"
-      />
+      <div className="flex items-center space-x-2">
+        <select
+          value={currentMatchScore.team1Name}
+          onChange={(e) => setTeamName(e.target.value, "team1Name")}
+          className="bg-transparent border-b border-gray-300 focus:outline-none text-center w-32 appearance-none"
+        >
+          <option value="" disabled>
+            Select Team 1
+          </option>
+          {[].map((team) => (
+            <option key={team} value={team}>
+              {team}
+            </option>
+          ))}
+        </select>
+
+        <span className="text-2xl font-semibold">vs</span>
+
+        <select
+          value={currentMatchScore.team2Name}
+          onChange={(e) => setTeamName(e.target.value, "team2Name")}
+          className="bg-transparent border-b border-gray-300 focus:outline-none text-center w-32 appearance-none"
+        >
+          <option value="" disabled>
+            Select Team 2
+          </option>
+          {[].map((team) => (
+            <option key={team} value={team}>
+              {team}
+            </option>
+          ))}
+        </select>
+      </div>
     </h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

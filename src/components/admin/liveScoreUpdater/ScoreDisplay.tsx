@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import type { Match } from '../../../types/match';
+import { matches } from '../../../types/common';
 
 
 interface ScoreDisplayProps {
@@ -46,23 +47,44 @@ export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, updateMatchTe
   }
 };
 
+const isExist = (value:any)=>{
+    if(value)
+      return true
+    return false
+}
+
 const toggleBattingTeam = () => {
    const currentBattingTeamName =
     editableScore.team1Name === editableScore.battingTeamName
       ? editableScore.team2Name
       : editableScore.team1Name;
 
-      console.log(currentBattingTeamName);
-
   const updateScore = {
     ...editableScore,
     battingTeamName: currentBattingTeamName,
+    target: matchScore?.totalRuns ,
+    matchScore: {...matchScore,inning:2}
   };
 
-  console.log(currentBattingTeamName);
-  updateMatchTeam(updateScore);
+  const totalRuns = updateScore.matchScore?.totalRuns
 
+  const newMatch = matches;
+  newMatch.battingTeamName = currentBattingTeamName
+  newMatch.matchScore.innings = 2;
+  newMatch.target = totalRuns
+
+  updateMatchTeam(newMatch as any);
 };
+
+const handleOversChange = (e) => {
+      console.log(e)
+  const value = parseFloat(e.target.value);
+    const transformed = Math.ceil(value);
+    console.log(transformed,value)
+    handleChange({ target: { name: 'overs', value: transformed.toString()} });
+  
+};
+
 
   const { matchScore,battingTeamName } = editableScore;
 
@@ -95,19 +117,16 @@ const toggleBattingTeam = () => {
           className="w-34 text-center bg-white border rounded px-2 py-1"
         />
       </div>
-      <div className="text-2xl font-semibold text-gray-600">
-        Overs:
-        <input
-          type="number"
-          name="overs"
-          step="0.1"
-          value={matchScore?.overs || 0}
-          onChange={handleChange}
-          className="ml-2 w-20 text-center bg-white border rounded px-2 py-1"
-        />
+      <div className="text-4xl text-center justify-center font-semibold text-gray-600 flex items-center">
+        <span>Overs:</span>
+        <span className="ml-4 text-4xl text-gray-800">
+          {matchScore?.overs?.toFixed(1) ?? "0.0"}
+        </span>
       </div>
 
-      {matchScore?.currentPartnership !== undefined && (
+
+
+      {/* {matchScore?.currentPartnership !== undefined && (
         <div className="text-xl text-gray-500">
           Partnership:
           <input
@@ -119,8 +138,9 @@ const toggleBattingTeam = () => {
           />
           runs
         </div>
-      )}
+      )} */}
 
+    {isExist(editableScore?.target)    && (
       <div className="text-xl text-gray-700">
         Target:
         <input
@@ -131,8 +151,9 @@ const toggleBattingTeam = () => {
           className="ml-2 w-24 text-center bg-white border rounded px-2 py-1"
         />
       </div>
+      )}
 
-      {matchScore?.requiredRuns !== undefined && matchScore?.requiredBalls !== undefined && (
+      {matchScore?.requiredRuns !== undefined && matchScore?.requiredBalls !== undefined && isExist(editableScore?.target)  && (
         <div className="text-lg text-gray-700">
           Need
           <input

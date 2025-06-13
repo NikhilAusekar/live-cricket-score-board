@@ -130,9 +130,9 @@ export const matches: Match = {
     extras: 0,
     fallOfWickets: [
       {
-        wicketNumber: 1,
-        score: 42,
-        over: 6.3,
+        wicketNumber: 0,
+        score: 0,
+        over: 0,
         batsmanOutId: 'player123',
         batsmanOutName: 'John Doe',
         bowlerId: 'bowler456',
