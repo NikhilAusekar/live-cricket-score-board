@@ -76,37 +76,30 @@ const toggleBattingTeam = () => {
   updateMatchTeam(newMatch as any);
 };
 
-const handleOversChange = (e) => {
-      console.log(e)
-  const value = parseFloat(e.target.value);
-    const transformed = Math.ceil(value);
-    console.log(transformed,value)
-    handleChange({ target: { name: 'overs', value: transformed.toString()} });
+// const handleOversChange = (e) => {
+//       console.log(e)
+//   const value = parseFloat(e.target.value);
+//     const transformed = Math.ceil(value);
+//     console.log(transformed,value)
+//     handleChange({ target: { name: 'overs', value: transformed.toString()} });
   
-};
+// };
 
 
   const { matchScore,battingTeamName } = editableScore;
 
   return (
     <div className="text-center mb-6 space-y-3">
-      <div className='text-4xl font-extrabold text-gray-800'>
-        Batting:
-        <input
-          type="text"
-          name="battingTeamName"
-          value={battingTeamName}
-          onChange={handleChange}
-          className="w-34 text-center bg-white border rounded px-2 py-1"
-        />
+      <div className="text-3xl flex text-center justify-center font-bold text-gray-800">
+        Batting: <span className="ml-2">{battingTeamName}</span>
       </div>
-      <div className="text-4xl font-extrabold text-gray-800">
+      <div className="text-3xl text-center font-extrabold text-gray-800">
         <input
           type="number"
           name="totalRuns"
           value={matchScore?.totalRuns || 0}
           onChange={handleChange}
-          className="w-34 text-center bg-white border rounded px-2 py-1"
+          className="w-28 text-center bg-white border rounded px-2 py-1"
         />
         <span className='px-2'>/</span>
         <input
@@ -114,7 +107,7 @@ const handleOversChange = (e) => {
           name="wickets"
           value={matchScore?.wickets || 0}
           onChange={handleChange}
-          className="w-34 text-center bg-white border rounded px-2 py-1"
+          className="w-28 text-center bg-white border rounded px-2 py-1"
         />
       </div>
       <div className="text-4xl text-center justify-center font-semibold text-gray-600 flex items-center">

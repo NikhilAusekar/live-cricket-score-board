@@ -28,57 +28,73 @@ export const CurrentBowlerUpdater: React.FC<BowlerInfoProps> = ({
     return <p className="text-gray-600">No bowler currently active.</p>;
   }
 
+
   return (
     <div className="border-t pt-4 mt-6">
-      <h3 className="text-xl font-semibold mb-3">Current Bowler:</h3>
-      <div className="flex items-center justify-between bg-gray-50 p-3 rounded-md">
-        <input
-          type="text"
-          name="name"
-          value={updatedBowler.name}
-          onChange={handleChange}
-          className="font-medium text-lg bg-white border px-2 py-1 rounded"
-        />
-        <div className="text-right space-y-1">
-          <div className="text-xl font-bold flex items-center gap-2">
-            <label>R</label>
-            <input
-              type="number"
-              name="runs"
-              value={updatedBowler.runs}
-              onChange={handleChange}
-              className="w-16 bg-white border px-1 py-0.5 rounded text-right"
-            />
-            /
-            <label>W</label>
-            <input
-              type="number"
-              name="wickets"
-              value={updatedBowler.wickets}
-              onChange={handleChange}
-              className="w-12 bg-white border px-1 py-0.5 rounded text-right"
-            />
-          </div>
-          <div className="text-sm text-gray-600">
-            (
-            <input
-              type="number"
-              name="overs"
-              value={updatedBowler.overs}
-              onChange={handleChange}
-              className="w-16 bg-white border px-1 py-0.5 rounded text-right"
-              step="0.1"
-            />
-            {' '}Overs)
-          </div>
-        </div>
+  <h3 className="text-xl font-semibold mb-3">Current Bowler:</h3>
+  <div className="flex flex-wrap sm:flex-nowrap items-start sm:items-center justify-between bg-gray-50 p-3 rounded-md gap-2">
+    
+    {/* Name input */}
+    <input
+      type="text"
+      name="name"
+      value={updatedBowler.name}
+      onChange={handleChange}
+      className="font-medium text-lg bg-white border px-2 py-1 rounded w-full sm:w-1/3 min-w-0"
+      placeholder="Bowler Name"
+    />
+
+    {/* Score details */}
+    <div className="text-right space-y-1 w-full sm:w-auto sm:text-left">
+      {/* Runs / Wickets */}
+      <div className="text-xl font-bold flex flex-wrap justify-end sm:justify-start gap-2">
+        <label className="flex items-center gap-1">
+          R
+          <input
+            type="number"
+            name="runs"
+            value={updatedBowler.runs}
+            onChange={handleChange}
+            className="w-16 bg-white border px-1 py-0.5 rounded text-right"
+          />
+        </label>
+        /
+        <label className="flex items-center gap-1">
+          W
+          <input
+            type="number"
+            name="wickets"
+            value={updatedBowler.wickets}
+            onChange={handleChange}
+            className="w-12 bg-white border px-1 py-0.5 rounded text-right"
+          />
+        </label>
       </div>
-      <button
-        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        onClick={() => updateCurrentBowlwer(updatedBowler)}
-      >
-        Update Bowler
-      </button>
+
+      {/* Overs */}
+      <div className="text-sm text-gray-600 flex items-center justify-end sm:justify-start gap-1">
+        (
+        <input
+          type="number"
+          name="overs"
+          value={updatedBowler.overs}
+          onChange={handleChange}
+          className="w-16 bg-white border px-1 py-0.5 rounded text-right"
+          step="0.1"
+        />
+        Overs)
+      </div>
     </div>
+  </div>
+
+  {/* Submit Button */}
+  <button
+    className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-full sm:w-auto"
+    onClick={() => updateCurrentBowlwer(updatedBowler)}
+  >
+    Update Bowler
+  </button>
+</div>
+
   );
 };

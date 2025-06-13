@@ -266,7 +266,7 @@ const onBallAction = (actionType: string, value?: number) => {
     <div className="container mx-auto p-4">
       <h3 className="text-3xl font-bold mb-4 text-center">
       Live Score Update:{" "}
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center justify-center space-x-2">
         <select
           value={currentMatchScore.team1Name}
           onChange={(e) => setTeamName(e.target.value, "team1Name")}
