@@ -241,9 +241,7 @@ export interface LiveMatchScore {
   currentBatsmen:Batsman[];
   currentBowler: Bowler;
   currentPartnership: number;
-  lastWicket?: FallOfWicket;
   matchStatus: 'Upcoming' | 'Ongoing' | 'Completed'; 
-  commentary: CommentaryEvent[];
   extras?: number;
   fallOfWickets?: FallOfWicket[];
 }

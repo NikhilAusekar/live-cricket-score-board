@@ -87,9 +87,9 @@ export const matches: Match = {
   tossWinnerId: 'team-001',
   tossWinnerName: 'Team A',
   battingTeamName:'RCB',
+  target: 0,
   tossDecision: 'Bat',
   currentInnings: inningsExample,
-  target: 0,
   matchScore: {
     totalRuns: 0,
     wickets: 0,
@@ -126,25 +126,7 @@ export const matches: Match = {
       wickets: 0,
     },
     currentPartnership: 0,
-    lastWicket: {
-      wicketNumber: 1,
-      score: 42,
-      over: 6.3,
-      batsmanOutId: 'player123',
-      batsmanOutName: 'Vikas',
-      bowlerId: 'bowler456',
-      bowlerName: 'Nikhil',
-      fielderId: 'fielder789',
-      fielderName: 'Uday',
-      wicketType: 'Caught',
-    },
     matchStatus: 'Ongoing',
-    commentary: [
-      {
-        text: 'Player A1 hits a boundary!',
-        type: 'FOUR'
-      }
-    ],
     extras: 0,
     fallOfWickets: [
       {
