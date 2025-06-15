@@ -2,9 +2,18 @@
 export interface Team {
   id: string;
   name: string;
-  captainId?: string; // Optional: ID of the captain player
-  captainName?: string; // Optional: Name of the captain player (if populated from player data)
-  // Add any other team properties like logoUrl, etc.
+  captainId?: string; 
+  captainName?: string; 
+}
+
+export interface TeamOptions{
+  Label:string;
+  Value:string;
+}
+
+export interface PlayerOptions{
+  Label:string;
+  Value:string;
 }
 
 export interface CreateTeamPayload {

@@ -7,10 +7,10 @@ export type PlayerRole = typeof PlayerRoles[number];
 export interface Player {
   id: string;
   name: string;
-  teamId: string; // ID of the team the player belongs to
-  teamName?: string; // Optional: Name of the team (if populated from team data)
+  teamId: string; 
+  teamName?: string; 
   role: PlayerRole;
-  // Add any other player properties like battingStyle, bowlingStyle, imageUrl, etc.
+  
 }
 
 export interface CreatePlayerPayload {

@@ -9,6 +9,9 @@ import { CurrentBowlerUpdater } from './CurrentBowlerUpdater';
 import { BallActionButtons } from './BallActionButtons';
 import { CurrentBatsmenUpdater } from './CurrentBatsmenUpdater';
 import { ballActionRuns } from '../../common/Constatns';
+import Select from 'react-select';
+import type { PlayerOptions, Team, TeamOptions } from '../../../types/team';
+import type { Player } from '../../../types/palyer';
 
 interface LiveScoreUpdaterProps {}
 
@@ -20,6 +23,8 @@ export const LiveScoreUpdater: React.FC<LiveScoreUpdaterProps> = () => {
   const [error, setError] = useState<string | null>(null);
   const [matchDetails, setMatchDetails] = useState<Match | null>(null);
   const previousMatchRef = useRef<Match | null>(null);
+  const [teamOptions,setTeamOptions] = useState<TeamOptions[]>([]);
+  const [playersOptions,setPlayersOptions] = useState<PlayerOptions[]>([]);
 
 
   useEffect(() => {
@@ -27,6 +32,12 @@ export const LiveScoreUpdater: React.FC<LiveScoreUpdaterProps> = () => {
       try {
         setLoading(true);
         const match = await matchService.getMatches();
+        const teams = await matchService.getTeams() ;
+        const options: TeamOptions[] = teams.map((team) => ({Label: team.name,Value: team.id}));
+        setTeamOptions(options)
+        const players = await matchService.getPlayers();
+        const pOptions: PlayerOptions[] = players.map((player) =>({Label:player.id,Value:player.name}))// again have to filter based on the selected team
+        setPlayersOptions(pOptions)
         setMatchDetails(match);
         updateMatchScore(match); // Initialize Zustand state with fetched match
         setError(null);
@@ -266,39 +277,71 @@ const onBallAction = (actionType: string, value?: number) => {
     <div className="container mx-auto p-4">
       <h3 className="text-3xl font-bold mb-4 text-center">
       Live Score Update:{" "}
-      <div className="flex items-center justify-center space-x-2">
-        <select
-          value={currentMatchScore.team1Name}
-          onChange={(e) => setTeamName(e.target.value, "team1Name")}
-          className="bg-transparent border-b border-gray-300 focus:outline-none text-center w-32 appearance-none"
-        >
-          <option value="" disabled>
-            Select Team 1
-          </option>
-          {[].map((team) => (
-            <option key={team} value={team}>
-              {team}
-            </option>
-          ))}
-        </select>
 
-        <span className="text-2xl font-semibold">vs</span>
+<div className="flex items-center justify-center space-x-4">
+  <div className="w-40">
+    <Select
+      options={teamOptions}
+      value={teamOptions.find((option) => option.Value === currentMatchScore.team1Name)}
+      onChange={(selected) => setTeamName(selected?.Value || '', "team1Name")}
+      placeholder="Select Team 1"
+      classNames={{
+        control: () => 'bg-transparent border-b border-gray-300 text-center shadow-none rounded-none',
+      }}
+      styles={{
+        control: (base) => ({
+          ...base,
+          backgroundColor: 'transparent',
+          border: 'none',
+          borderBottom: '1px solid #D1D5DB', // Tailwind gray-300
+          boxShadow: 'none',
+          minHeight: 'auto',
+        }),
+        singleValue: (base) => ({
+          ...base,
+          textAlign: 'center',
+        }),
+        menu: (base) => ({
+          ...base,
+          zIndex: 50,
+        }),
+      }}
+    />
+  </div>
 
-        <select
-          value={currentMatchScore.team2Name}
-          onChange={(e) => setTeamName(e.target.value, "team2Name")}
-          className="bg-transparent border-b border-gray-300 focus:outline-none text-center w-32 appearance-none"
-        >
-          <option value="" disabled>
-            Select Team 2
-          </option>
-          {[].map((team) => (
-            <option key={team} value={team}>
-              {team}
-            </option>
-          ))}
-        </select>
-      </div>
+  <span className="text-2xl font-semibold">vs</span>
+
+    <div className="w-40">
+      <Select
+        options={teamOptions}
+        value={teamOptions.find((option) => option.Value === currentMatchScore.team2Name)}
+        onChange={(selected) => setTeamName(selected?.Value || '', "team2Name")}
+        placeholder="Select Team 2"
+        classNames={{
+          control: () => 'bg-transparent border-b border-gray-300 text-center shadow-none rounded-none',
+        }}
+        styles={{
+          control: (base) => ({
+            ...base,
+            backgroundColor: 'transparent',
+            border: 'none',
+            borderBottom: '1px solid #D1D5DB',
+            boxShadow: 'none',
+            minHeight: 'auto',
+          }),
+          singleValue: (base) => ({
+            ...base,
+            textAlign: 'center',
+          }),
+          menu: (base) => ({
+            ...base,
+            zIndex: 50,
+          }),
+        }}
+      />
+    </div>
+</div>
+
     </h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

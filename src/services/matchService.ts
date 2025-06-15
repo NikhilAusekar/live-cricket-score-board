@@ -3,6 +3,8 @@ import axios from 'axios';
 import { type Match, type CreateMatchPayload, type UpdateMatchPayload } from '../types/match';
 import { matches, type ApiResponse } from '../types/common';
 import { type LiveScoreUpdateDto } from '../types/match'; // For SignalR DTOs if sending via REST
+import type { Team } from '../types/team';
+import type { Player } from '../types/palyer';
 
 const API_BASE_URL = 'http://localhost:5000/api';
 
@@ -18,6 +20,16 @@ const matchService = {
     } else {
       return matches as any;
     }
+  },
+
+  getTeams:async():Promise<Team[]> =>{
+    const response = await axios.get<ApiResponse<Team[]>>(`${API_BASE_URL}/Team/GetTeams`);
+    return response.data.data;
+  },
+
+  getPlayers:async():Promise<Player[]> =>{
+    const response = await axios.get<ApiResponse<Player[]>>(`${API_BASE_URL}/Team/GetPlayers`);
+    return response.data.data;
   },
 
   createMatch: async (payload: CreateMatchPayload): Promise<Match> => {
