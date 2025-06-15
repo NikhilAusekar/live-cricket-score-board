@@ -15,11 +15,11 @@ function AppRouter() {
   return (
     <Routes>
       {/* Public Routes - Accessible to everyone */}
-      <Route path="/" element={<Layout showFooter={true} showHeader={true} />}>
-        {/*<Route path="/match/:matchId" element={<MatchScorecard />} /> 
-        <Route path="/standings" element={<TournamentStandings />} />  */}
+        <Route path="/" element={<Layout showFooter={true} showHeader={true} />}>
+          {/*<Route path="/match/:matchId" element={<MatchScorecard />} /> 
+          <Route path="/standings" element={<TournamentStandings />} />  */}
         <Route path="/login" element={<Login />} />  
-      </Route>
+        </Route>
 
       {/* Admin Protected Routes - Only accessible after login */}
       <Route path="/admin" element={<ProtectedRoute><Layout showHeader={true} showFooter={false} /></ProtectedRoute>}>

@@ -19,16 +19,17 @@ function Header() {
       <Toolbar>
         <SportsCricketIcon sx={{ mr: 1, color: '#FFD700' }} /> {/* Cricket icon */}
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to="/admin/matches/score" style={{ textDecoration: 'none', color: 'inherit' }}>
             Company Cricket Live
           </Link>
         </Typography>
         <Box sx={{ display: { xs: 'none', md: 'flex' } }}> {/* Hide on small screens */}
-          <Button color="inherit" component={Link} to="/live">Live Scores</Button>
-          <Button color="inherit" component={Link} to="/standings">Standings</Button>
+          {/* <Button color="inherit" component={Link} to="/live">Live Scores</Button> */}
+          {/* <Button color="inherit" component={Link} to="/standings">Standings</Button> */}
           {user ? (
             <>
-              <Button color="inherit" component={Link} to="/admin">Admin Dashboard</Button>
+              {/* <Button color="inherit" component={Link} to="/admin">Admin Dashboard</Button> */}
+              <Button color="inherit" component={Link} to="/admin/matches/score">Score Control Board</Button> 
               <Button color="inherit" onClick={handleLogout}>Logout ({user.username})</Button>
             </>
           ) : (
